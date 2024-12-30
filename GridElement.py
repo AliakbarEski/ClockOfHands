@@ -30,37 +30,7 @@ class GridElement:
 
     
     def set_hands(self, hand_angles):
-        self.hand_angles = hand_angles
-    
-    def show_hands_top_left_corner(self):
-        self.hand_angles = [0, 270]
-
-    def show_hands_top_right_corner(self):
-        self.hand_angles = [180, 270]
-
-    def show_hands_bottom_left_corner(self):
-        self.hand_angles = [0, 90]
-
-    def show_hands_bottom_right_corner(self):
-        self.hand_angles = [90, 180]
-
-    def show_hands_horizontal_right(self):
-        self.hand_angles = [0, 0]
-
-    def show_hands_horizontal_left(self):
-        self.hand_angles = [180, 180]
-
-    def show_hands_vertical_up(self):
-        self.hand_angles = [90, 90]
-    
-    def show_hands_vertical_down(self):
-        self.hand_angles = [270, 270]
-
-    def show_hands_vertical(self):
-        self.hand_angles = [90, 270]
-
-    def show_hands_idle(self):
-        self.hand_angles = [225, 225]
+        self.hand_angles = hand_angles    
 
     def initialize(self, canvas):
         self.lines.append(canvas.create_line(self._get_line_coords_for_hands(self.current_hand_angles[0])))

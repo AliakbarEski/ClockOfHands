@@ -1,0 +1,11 @@
+class HandPositions:
+    top_left_corner = [0, 270]
+    top_right_corner = [180, 270]
+    bottom_left_corner = [0, 90]
+    bottom_right_corner = [90, 180]
+    horizontal_right = [0, 0]
+    horizontal_left = [180, 180]
+    vertical_up = [90, 90]
+    vertical_down = [270, 270]
+    vertical = [90, 270]
+    idle = [225, 225]

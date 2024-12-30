@@ -1,4 +1,5 @@
 import GridElement
+import HandPositions as hp
 
 class Grid:
 
@@ -22,6 +23,59 @@ class Grid:
         for row in self.grid:
             for element in row:
                 element.initialize(canvas)
+        
+        # initialize the hands positions for each digit
+        self.hand_positions = [ 
+                               # 0
+                               [[hp.HandPositions.top_left_corner,    hp.HandPositions.top_right_corner], 
+                               [hp.HandPositions.vertical,            hp.HandPositions.vertical], 
+                               [hp.HandPositions.bottom_left_corner,  hp.HandPositions.bottom_right_corner]], 
+
+                               # 1
+                               [[hp.HandPositions.idle,               hp.HandPositions.vertical_down], 
+                               [hp.HandPositions.idle,                hp.HandPositions.vertical], 
+                               [hp.HandPositions.idle,                hp.HandPositions.vertical_up]], 
+
+                               # 2
+                               [[hp.HandPositions.horizontal_right,   hp.HandPositions.top_right_corner], 
+                               [hp.HandPositions.top_left_corner,     hp.HandPositions.bottom_right_corner], 
+                               [hp.HandPositions.bottom_left_corner,  hp.HandPositions.horizontal_left]], 
+
+                               # 3
+                               [[hp.HandPositions.horizontal_right,   hp.HandPositions.top_right_corner], 
+                               [hp.HandPositions.horizontal_right,    hp.HandPositions.vertical], 
+                               [hp.HandPositions.horizontal_right,    hp.HandPositions.bottom_right_corner]],
+
+                               # 4
+                               [[hp.HandPositions.vertical_down,      hp.HandPositions.vertical_down], 
+                               [hp.HandPositions.bottom_left_corner,  hp.HandPositions.vertical], 
+                               [hp.HandPositions.idle,                hp.HandPositions.vertical_up]],
+
+                               # 5
+                               [[hp.HandPositions.top_left_corner,    hp.HandPositions.horizontal_left], 
+                               [hp.HandPositions.bottom_left_corner,  hp.HandPositions.top_right_corner], 
+                               [hp.HandPositions.horizontal_right,    hp.HandPositions.bottom_right_corner]],
+
+                               # 6
+                               [[hp.HandPositions.top_left_corner,    hp.HandPositions.horizontal_left], 
+                               [hp.HandPositions.vertical,            hp.HandPositions.top_right_corner], 
+                               [hp.HandPositions.bottom_left_corner,  hp.HandPositions.bottom_right_corner]],
+
+                               # 7
+                               [[hp.HandPositions.horizontal_right,   hp.HandPositions.top_right_corner], 
+                               [hp.HandPositions.idle,                hp.HandPositions.vertical], 
+                               [hp.HandPositions.idle,                hp.HandPositions.vertical_up]],
+
+                               # 8
+                               [[hp.HandPositions.top_left_corner,    hp.HandPositions.top_right_corner], 
+                               [hp.HandPositions.bottom_left_corner,  hp.HandPositions.bottom_right_corner], 
+                               [hp.HandPositions.bottom_left_corner,  hp.HandPositions.bottom_right_corner]],
+
+                               # 9
+                               [[hp.HandPositions.top_left_corner,    hp.HandPositions.top_right_corner], 
+                               [hp.HandPositions.bottom_left_corner,  hp.HandPositions.vertical], 
+                               [hp.HandPositions.horizontal_right,    hp.HandPositions.bottom_right_corner]]
+        ]
 
     def draw(self, canvas):
         for row in self.grid:
@@ -34,90 +88,15 @@ class Grid:
                 element.update()
 
     def show_num(self, num, offset):
-        for i in range(self.rows//3):
-            for j in range(self.cols//3):
-                self.grid[offset[0] + i][offset[1] + j].show_hands_idle()
-        
-        if num == 0:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_top_left_corner()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_top_right_corner()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_vertical()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_vertical()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_bottom_left_corner()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_bottom_right_corner()
-        
-        elif num == 1:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_idle()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_vertical_down()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_idle()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_vertical()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_idle()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_vertical_up()
-
-        elif num == 2:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_horizontal_right()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_top_right_corner()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_top_left_corner()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_bottom_right_corner()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_bottom_left_corner()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_horizontal_left()
-        
-        elif num == 3:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_horizontal_right()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_top_right_corner()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_horizontal_right()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_vertical()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_horizontal_right()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_bottom_right_corner()
-        
-        elif num == 4:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_vertical_down()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_vertical_down()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_bottom_left_corner()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_vertical()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_idle()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_vertical_up()
-
-        elif num == 5:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_top_left_corner()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_horizontal_left()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_bottom_left_corner()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_top_right_corner()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_horizontal_right()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_bottom_right_corner()
-
-        elif num == 6:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_top_left_corner()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_horizontal_left()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_vertical()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_top_right_corner()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_bottom_left_corner()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_bottom_right_corner()
-        
-        elif num == 7:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_horizontal_right()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_top_right_corner()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_idle()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_vertical()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_idle()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_vertical_up()
-        
-        elif num == 8:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_top_left_corner()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_top_right_corner()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_bottom_left_corner()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_bottom_right_corner()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_bottom_left_corner()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_bottom_right_corner()
-        
-        elif num == 9:
-            self.grid[offset[0]+0][offset[1]+0].show_hands_top_left_corner()
-            self.grid[offset[0]+0][offset[1]+1].show_hands_top_right_corner()
-            self.grid[offset[0]+1][offset[1]+0].show_hands_bottom_left_corner()
-            self.grid[offset[0]+1][offset[1]+1].show_hands_vertical()
-            self.grid[offset[0]+2][offset[1]+0].show_hands_horizontal_right()
-            self.grid[offset[0]+2][offset[1]+1].show_hands_bottom_right_corner()
+        for i in range(self.rows//self.digit_grid_height):
+            for j in range(self.cols//self.digit_grid_width):
+                self.grid[offset['h'] + i][offset['w'] + j].set_hands(self.hand_positions[num][i][j])
 
     def show_nums(self, nums):
         for i in range(len(nums)):
-            self.show_num(nums[i], ((i//self.digit_grid_width) * (self.rows//self.digit_grid_height), (i%self.digit_grid_width) * (self.cols//self.digit_grid_width)))
+            self.show_num(nums[i], 
+                          {
+                           'h':(i//self.digit_grid_width) * (self.rows//self.digit_grid_height), 
+                           'w':(i%self.digit_grid_width) * (self.cols//self.digit_grid_width)
+                          }
+                        )
