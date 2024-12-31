@@ -34,6 +34,14 @@ You can customize the appearance and behavior of the clock by modifying the foll
 
 You can also modify the hand positions in the `HandPositions` class to change the way digits are represented.
 
+
+## Screenshot 
+
+![12:15:50 am as displayed on the clock](image.png)
+
+12:15:50 am as displayed by the clock
+
+
 ## License
 
 This project is licensed under the MIT License.
