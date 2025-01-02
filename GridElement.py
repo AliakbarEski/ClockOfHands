@@ -33,8 +33,8 @@ class GridElement:
         self.hand_angles = hand_angles    
 
     def initialize(self, canvas):
-        self.lines.append(canvas.create_line(self._get_line_coords_for_hands(self.current_hand_angles[0])))
-        self.lines.append(canvas.create_line(self._get_line_coords_for_hands(self.current_hand_angles[1])))
+        self.lines.append(canvas.create_line(self._get_line_coords_for_hands(self.current_hand_angles[0]), fill="#FFFFFF"))
+        self.lines.append(canvas.create_line(self._get_line_coords_for_hands(self.current_hand_angles[1]), fill="#FFFFFF"))
         canvas.create_oval(self.x_offset - self.radius/2, self.y_offset - self.radius/2, self.x_offset + self.radius/2, self.y_offset + self.radius/2, outline="#505050")
 
     def update(self):
